@@ -34,18 +34,67 @@ def similarity_grouping(data: list) -> list:
 
 
 def highest_count_items(data: str) -> list:
-    # delete this line and pass to write your code here
-    pass
+   item_count = {}
+   
+   result = []
+   
+   items = [item.strip() for item in data.split(",")]
+   
+   max_count = 0
+   
+   for item in items:
+       if item in item_count:
+           item_count[item] += 1
+       else:
+           item_count[item] = 1
+           
+       max_count = max(max_count, item_count[item])
+    
+
+   
+   for item, count in item_count.items():
+     if count == max_count:
+            result.append([item,count])
+            
+   return result
 
 
 def valid_char_in_string(popList: list, charSet: list) -> bool:
-    # delete this line and pass to write your code here
-    pass
+    for char in charSet:
+        if len(char) != 1:
+            return False
+    
+    for element in popList:
+        for char in element:
+            if char not in charSet:
+                return False
+
+    return True
 
 
 def total_price(unit: int) -> float:
-    # delete this line and pass to write your code here
-    pass
+    total = 0
+    
+    if unit > 6:
+        multipler = unit // 6
+        total += multipler * 5 
+        leftover_units = unit % 6
+        
+        if leftover_units > 0:
+            total += leftover_units * 1.25
+            
+        if total > 20: 
+            total -= total * 0.1
+
+    elif unit < 6:
+        total += unit * 1.25
+
+    elif unit == 6:
+        total += 5
+        
+
+    return total
+        
 
 
 if __name__ == "__main__":
